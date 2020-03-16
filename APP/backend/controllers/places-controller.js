@@ -127,7 +127,7 @@ const createPlace = async (req,res,next) =>{
     res.status(201).json({place: createdPlace});
 };
 
-const updatePlace = (req,res,next) =>{
+const updatePlace = async (req,res,next) =>{
     const placeId = req.params.pid;
 
     const errors = validationResult(req);
@@ -138,27 +138,55 @@ const updatePlace = (req,res,next) =>{
         throw new HttpError('Invalid unputs passed, please check your data.', 422);
     }
 
-    const updatedPlace = {...DUMMY_PLACES.find(place => place.id === placeId)};
-    const placeIndex = DUMMY_PLACES.findIndex(place => place.id === placeId);
+    // const updatedPlace = {...DUMMY_PLACES.find(place => place.id === placeId)};
+    // const placeIndex = DUMMY_PLACES.findIndex(place => place.id === placeId);
+
+    let updatedPlace;
+
+    try{
+        updatedPlace = await Place.findById(placeId);
+    }
+    catch(err){
+        const error = new HttpError('Something went wrong, could not update place',500);
+        return next(error);
+    }
 
     updatedPlace.title = title;
     updatedPlace.description = description;
 
-    DUMMY_PLACES[placeIndex] = updatedPlace;
+    try{
+        await updatedPlace.save();
+    }
+    catch(err){
+        const error = new HttpError('Something went wrong, could not update place',500);
+        return next(error);
+    }
 
-    res.status(200).json({place: updatedPlace});
+    // console.log("przy update typ: " + typeof(updatedPlace));
+    res.status(200).json({place: updatedPlace.toObject({getters:true})});
 
 };
 
-const deletePlace = (req,res,next) =>{
+const deletePlace = async (req,res,next) =>{
 
     const placeId = req.params.pid;
 
-    if(!DUMMY_PLACES.find(place => place.id === placeId)){
-        throw new HttpError('Could not find a place for that id');
-    }
+    // if(!DUMMY_PLACES.find(place => place.id === placeId)){
+    //     throw new HttpError('Could not find a place for that id');
+    // }
 
-    DUMMY_PLACES = DUMMY_PLACES.filter(place => place.id !== placeId);
+    // DUMMY_PLACES = DUMMY_PLACES.filter(place => place.id !== placeId);
+
+    let deletedPlace;
+
+    try{
+        deletedPlace = await Place.findById(placeId);
+        await deletedPlace.remove();
+    }
+    catch(err){
+        const error = new HttpError('Something went wrong, could not delete place');
+        return next(error);
+    }
 
     res.status(202).json({message: 'Place deleted.'});
 
