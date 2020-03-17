@@ -135,7 +135,8 @@ const updatePlace = async (req,res,next) =>{
     const {title, description} = req.body;
 
     if (!errors.isEmpty()) {
-        throw new HttpError('Invalid unputs passed, please check your data.', 422);
+        const error =  new HttpError('Invalid unputs passed, please check your data.', 422);
+        return next(error);
     }
 
     // const updatedPlace = {...DUMMY_PLACES.find(place => place.id === placeId)};
