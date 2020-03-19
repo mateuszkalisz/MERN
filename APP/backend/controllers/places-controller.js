@@ -6,30 +6,7 @@ const Place = require('../models/place');
 const User = require('../models/user');
 const mongoose = require('mongoose');
 
-let DUMMY_PLACES = [
-    {
-        id: 'p1',
-        title: 'Empire State Building',
-        description: 'One of the most famous sky scrapers in the world',
-        location: {
-            lat: 40.7484474,
-            long: -73.9871516
-        },
-        address: '20 W 34th St, New York, NY 10001',
-        creator: 'u1'
-    },
-    {
-        id: 'p2',
-        title: '2Empire State Building',
-        description: '2One of the most famous sky scrapers in the world',
-        location: {
-            lat: 40.7484474,
-            long: -73.9871516
-        },
-        address: '20 W 34th St, New York, NY 10001',
-        creator: 'u1'
-    }
-];
+
 
 const getPlaceById = async (req,res,next)=>{
     const placeId = req.params.pid;
@@ -59,23 +36,28 @@ const getPlaceByUserId = async (req,res,next)=>{
 
     // const userPlaces = DUMMY_PLACES.filter(userPlace => userPlace.creator === userId);
 
-    let userPlaces;
+    // let userPlaces;
+    let userWithPlaces;
+
 
     try{
-        userPlaces = await Place.find({creator: userId});
+        // userPlaces = await Place.find({creator: userId});
+        userWithPlaces = await User.findById(userId).populate('places');
 
     }catch(err){
         const error = new HttpError('Something went wrong, could not find a place for this user',500);
         return next(error);
     }
 
-    if(!userPlaces || userPlaces.length === 0){
+    // if(!userPlaces || userPlaces.length === 0){
+        if(!userWithPlaces || userWithPlaces.places.length === 0){
         // return res.status(404).json({message: 'Place not found for provided user id'});
         error = new HttpError('Place not found for provided user id', 404);
         return next(error);
     }
     else{
-        res.json({userPlaces: userPlaces.map(place => place.toObject({getters: true}))});
+        // res.json({userPlaces: userPlaces.map(place => place.toObject({getters: true}))});
+        res.json({userPlaces: userWithPlaces.places.map(place => place.toObject({getters: true}))});
     }
 };
 
