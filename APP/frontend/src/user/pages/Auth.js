@@ -1,20 +1,24 @@
 import React, { useState, useContext } from "react";
 import { useForm } from "../../shared/hooks/form-hook";
 import Input from "../../shared/components/FormElements/Input";
+import Button from "../../shared/components/FormElements/Button";
+import ErrorModal from '../../shared/components/UIElements/ErrorModal';
+import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
 import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_EMAIL,
   VALIDATOR_REQUIRE
 } from "../../shared/util/validators";
 
-import Button from "../../shared/components/FormElements/Button";
-import {AuthContext} from '../../shared/context/auth-context';
+import { AuthContext } from "../../shared/context/auth-context";
 
 import "./Auth.css";
 
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -31,36 +35,79 @@ const Auth = () => {
   );
 
   const switchAuthFormHandler = () => {
-
-    if(!isLoginMode){
-        setFormData({
-            ...formState,
-            name: undefined
-        }, formState.inputs.email.isValid && formState.inputs.password.isValid)
-    }
-    else{
-        setFormData({
-            ...formState.inputs,
-            name: {
-                value: '',
-                isValid: false,
-            }
-        }, false)
+    if (!isLoginMode) {
+      setFormData(
+        {
+          ...formState,
+          name: undefined
+        },
+        formState.inputs.email.isValid && formState.inputs.password.isValid
+      );
+    } else {
+      setFormData(
+        {
+          ...formState.inputs,
+          name: {
+            value: "",
+            isValid: false
+          }
+        },
+        false
+      );
     }
 
     setIsLoginMode(prevMode => !prevMode);
     //   console.log(isLoginMode);
   };
 
-  const authSubmitHandler = event => {
+  const authSubmitHandler = async event => {
     event.preventDefault();
     // console.log(formState.inputs); //send this to the backend
-    auth.login();
+
+    if (isLoginMode) {
+    } else {
+      try {
+        setIsLoading(true);
+        const response = await fetch("http://localhost:5000/api/users/signup", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            name: formState.inputs.name.value,
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value
+          })
+        });
+
+        const responseData = await response.json();
+        if(!response.ok){
+          throw new Error(responseData.message);
+        }
+
+        console.log(responseData);
+        setIsLoading(false);
+        auth.login();
+
+      } catch (err) {
+        console.log(err);
+        setIsLoading(false);
+        setError(err.message || 'Something went wrong, please try again');
+      }
+    }
+
+
   };
+
+  const errorHandler = () =>{
+    setError(null);
+  }
 
   return (
     <>
+      <ErrorModal error={error} onClear={errorHandler}/>
       <div className="auth">
+        {isLoading && <LoadingSpinner asOverlay/>}
         <h1>Login required</h1>
         <form className="auth-form" onSubmit={authSubmitHandler}>
           {!isLoginMode && (
