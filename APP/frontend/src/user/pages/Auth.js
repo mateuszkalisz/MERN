@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import { useForm } from "../../shared/hooks/form-hook";
 import Input from "../../shared/components/FormElements/Input";
 import Button from "../../shared/components/FormElements/Button";
-import ErrorModal from '../../shared/components/UIElements/ErrorModal';
-import LoadingSpinner from '../../shared/components/UIElements/LoadingSpinner';
+import ErrorModal from "../../shared/components/UIElements/ErrorModal";
+import LoadingSpinner from "../../shared/components/UIElements/LoadingSpinner";
 import {
   VALIDATOR_MINLENGTH,
   VALIDATOR_EMAIL,
@@ -11,14 +11,16 @@ import {
 } from "../../shared/util/validators";
 
 import { AuthContext } from "../../shared/context/auth-context";
+import { useHttpClient } from "../../shared/components/hooks/http-hook.js";
+
 
 import "./Auth.css";
 
 const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState();
+
+  const { isLoading, error, sendRequest, clearError } = useHttpClient();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -65,49 +67,45 @@ const Auth = () => {
     // console.log(formState.inputs); //send this to the backend
 
     if (isLoginMode) {
-    } else {
       try {
-        setIsLoading(true);
-        const response = await fetch("http://localhost:5000/api/users/signup", {
-          method: "POST",
-          headers: {
+        await sendRequest(
+          "http://localhost:5000/api/users/login",
+          "POST",
+          {
             "Content-Type": "application/json"
           },
-          body: JSON.stringify({
+          JSON.stringify({
+            email: formState.inputs.email.value,
+            password: formState.inputs.password.value
+          })
+        );
+        auth.login();
+      } catch (err) {}
+    } else {
+      try {
+        await sendRequest(
+          "http://localhost:5000/api/users/signup",
+          "POST",
+          {
+            "Content-Type": "application/json"
+          },
+          JSON.stringify({
             name: formState.inputs.name.value,
             email: formState.inputs.email.value,
             password: formState.inputs.password.value
           })
-        });
+        );
 
-        const responseData = await response.json();
-        if(!response.ok){
-          throw new Error(responseData.message);
-        }
-
-        console.log(responseData);
-        setIsLoading(false);
         auth.login();
-
-      } catch (err) {
-        console.log(err);
-        setIsLoading(false);
-        setError(err.message || 'Something went wrong, please try again');
-      }
+      } catch (err) {}
     }
-
-
   };
-
-  const errorHandler = () =>{
-    setError(null);
-  }
 
   return (
     <>
-      <ErrorModal error={error} onClear={errorHandler}/>
+      <ErrorModal error={error} onClear={clearError} />
       <div className="auth">
-        {isLoading && <LoadingSpinner asOverlay/>}
+        {isLoading && <LoadingSpinner asOverlay />}
         <h1>Login required</h1>
         <form className="auth-form" onSubmit={authSubmitHandler}>
           {!isLoginMode && (
