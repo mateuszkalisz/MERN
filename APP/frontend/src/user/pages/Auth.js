@@ -21,7 +21,7 @@ const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
 
-  const { isLoading, error, sendRequest, clearError } = useHttpClient();
+  const { isLoading, error, sendRequest, sendRequest2, clearError } = useHttpClient();
 
   const [formState, inputHandler, setFormData] = useForm(
     {
@@ -71,8 +71,6 @@ const Auth = () => {
   const authSubmitHandler = async event => {
     event.preventDefault();
 
-    console.log(formState.inputs);
-    // console.log(formState.inputs); //send this to the backend
 
     if (isLoginMode) {
       try {
@@ -91,17 +89,15 @@ const Auth = () => {
       } catch (err) {}
     } else {
       try {
-        const responseData = await sendRequest(
+        const formData = new FormData();
+        formData.append('email', formState.inputs.name.value);
+        formData.append('name', formState.inputs.email.value);
+        formData.append('password', formState.inputs.password.value);
+        formData.append('image', formState.inputs.image.value);
+        const responseData = await sendRequest2(
           "http://localhost:5000/api/users/signup",
           "POST",
-          {
-            "Content-Type": "application/json"
-          },
-          JSON.stringify({
-            name: formState.inputs.name.value,
-            email: formState.inputs.email.value,
-            password: formState.inputs.password.value
-          })
+          formData
         );
 
         auth.login(responseData.user.id);
