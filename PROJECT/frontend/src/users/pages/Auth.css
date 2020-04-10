@@ -1,0 +1,91 @@
+.auth{
+    position: fixed;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 40%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+.authPanel{
+    position: relative;
+    top: 0;
+    left: 0;
+    background-color: #002e4f;
+    border-radius: 20px;
+}
+
+.loginHeader h1{
+    display: block;
+    position: relative;
+    top: 20px;
+    font-size: 18px;
+}
+
+.authForm{
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 30px;
+}
+
+.authInput{
+    margin-bottom: 30px;
+}
+
+.authInput label{
+    font-size: 14px;
+}
+
+.authInput input{
+    width: 100%;
+    height: 30px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: none;
+    text-align: center;
+    color: black;
+}
+
+.authForm button{
+    border: none;
+    background-color: #87CEFA;	
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    color: black;
+    font-weight: bold;
+}
+
+.authForm button:hover{
+    color: white;	
+    cursor: pointer;
+}
+
+.loginFooter{
+    display: block;
+    margin-bottom: 30px;
+    height: 30px;
+}
+
+.loginFooter h2{
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.loginFooter span{
+    font-weight: bold;
+    font-size: 12px;
+    color: #87CEFA;	
+}
+
+.loginFooter span:hover{
+    cursor: pointer;
+    color: white;
+}
+
+
