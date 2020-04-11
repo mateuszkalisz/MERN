@@ -20,17 +20,13 @@ import './App.css';
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [userId, setUserId] = useState(null);
 
   const login = useCallback(()=>{
     setIsLoggedIn(true);
-    console.log('login');
   });
 
   const logout = useCallback(()=>{
     setIsLoggedIn(false);
-    console.log('logout');
-
   });
 
   const page = (
@@ -70,7 +66,7 @@ function App() {
     )
 
   return (
-    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, userId: userId, login: login, logout: logout}}>
+    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login: login, logout: logout}}>
     {/* temporary solution start */}
       <button onClick={login}>Zaloguj</button>
       <button onClick={logout}>Wyloguj</button>
