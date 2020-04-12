@@ -19,11 +19,16 @@ const Auth = () => {
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
   const [isValid, setIsValid] = useState(null);
+  const [error, setError] = useState();
 
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [team, setTeam] = useState("CoreFR");
+
+  const closeModal = () =>{
+    setIsValid(null);
+  }
 
   const inputHandler = (e) => {
     //log in and sign up
@@ -64,13 +69,13 @@ const Auth = () => {
     e.preventDefault();
 
     if(name.length < 6){
-      console.log("User name must be at least 6 characters. Please try again");
+      setError("User name must be at least 6 characters. Please try again");
       setIsValid(true);
       return;
     }
 
     if(password.length < 8){
-      console.log("Password must be at least 6 characters. Please try again");
+      setError("Password must be at least 6 characters. Please try again");
       setIsValid(true);
       return;
     }
@@ -81,20 +86,22 @@ const Auth = () => {
         setIsValid(true);
         auth.login();
       } else {
-        console.log("Wrong credentials");
-        setIsValid(false);
+        setError("Wrong credentials");
+        setIsValid(true);
         return;
       }
 
 
     } else {
       if (name === DUMMY_USER[0].name){
-        console.log("User existed");
+        setError("User existed");
+        setIsValid(true);
         return;
       }
 
       if(!validateEmail(email)){
-        console.log("Invalid email address. Please try again!");
+        setError("Invalid email address. Please try again!");
+        setIsValid(true);
         return;
       }
 
@@ -123,9 +130,9 @@ const Auth = () => {
   }
 
   return (
-    <>
-    {isValid ? <ErrorModal className='error' header='error' content='someerroroccured'/> : null}
-    <div className="auth">
+    <div className={`authentication ${isValid ? 'disabled': ''}`}>
+    {isValid ? <ErrorModal onClose={closeModal} className='error' header='Error' content={error}/> : null}
+    <div className='auth'>
       <Header />
       <main className="authPanel">
         <div className="loginHeader">{authHeader}</div>
@@ -139,6 +146,7 @@ const Auth = () => {
                 placeholder="User name"
                 value={name}
                 onChange={inputHandler}
+                disabled={isValid === null ? false : true}
               />
             </div>
             <div className="authInput">
@@ -149,6 +157,7 @@ const Auth = () => {
                 placeholder="Password"
                 value={password}
                 onChange={inputHandler}
+                disabled={isValid === null ? false : true}
               />
             </div>
             {!isLoginMode ? (
@@ -160,7 +169,8 @@ const Auth = () => {
                   placeholder="example@example.com"
                   onChange={inputHandler}
                   value={email}
-                />
+                  disabled={isValid === null ? false : true}
+                  />
               </div>
             ) : null}
             {!isLoginMode ? (
@@ -171,7 +181,8 @@ const Auth = () => {
                   id="team"
                   onChange={inputHandler}
                   value={team}
-                >
+                  disabled={isValid === null ? false : true}
+                  >
                   <option value="CoreFr">CoreFR</option>
                   <option value="CoreUK">CoreUK</option>
                   <option value="WOBE">WOBE</option>
@@ -188,7 +199,7 @@ const Auth = () => {
         <div className="loginFooter">{authFooter}</div>
       </main>
     </div>
-    </>
+    </div>
   );
 };
 

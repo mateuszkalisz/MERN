@@ -67,10 +67,6 @@ function App() {
 
   return (
     <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login: login, logout: logout}}>
-    {/* temporary solution start */}
-      <button onClick={login}>Zaloguj</button>
-      <button onClick={logout}>Wyloguj</button>
-    {/* temporary solution end */}
     {isLoggedIn ? <Router>{page}</Router> : <Auth/>}
     </AuthContext.Provider>
   );
