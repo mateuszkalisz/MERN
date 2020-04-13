@@ -74,6 +74,7 @@
 .authForm button:hover{
     color: white;	
     cursor: pointer;
+    transition: 0.2s;
 }
 
 .loginFooter{
@@ -91,6 +92,7 @@
     font-weight: bold;
     font-size: 12px;
     color: #87CEFA;	
+    transition: 0.2s;
 }
 
 .loginFooter span:hover{

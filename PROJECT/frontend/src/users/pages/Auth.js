@@ -84,7 +84,7 @@ const Auth = () => {
       if (name === DUMMY_USER[0].name && password === DUMMY_USER[0].password) {
         console.log("Succesful login");
         setIsValid(true);
-        auth.login();
+        auth.login(DUMMY_USER[0].id);
       } else {
         setError("Wrong credentials");
         setIsValid(true);

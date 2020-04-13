@@ -1,0 +1,43 @@
+.modal{
+    z-index: 100;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border-radius: 20px;
+    width: 50%;
+    text-align: center;
+}
+
+.modalHeader{
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background-color: #002e4f;
+}
+
+.modalHeader h2{
+    font-size: 18px;
+    padding: 5px;
+    color: white;
+
+}
+
+.modalCancel button{
+    border: none;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    background-color: #87CEFA;
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.modalCancel button:hover{
+    cursor: pointer;
+    color: white;
+    transition: 0.2s;
+}

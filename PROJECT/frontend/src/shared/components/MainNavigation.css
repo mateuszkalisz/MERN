@@ -1,0 +1,8 @@
+.navigation{
+    display: flex;
+    flex-direction: row;
+    background-color: #001f3f;
+    color: white;
+    padding: 0;
+    margin: 0;
+}

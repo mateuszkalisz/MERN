@@ -1,0 +1,48 @@
+nav{
+    flex-basis: 60%;
+    margin-left: 20%;
+}
+.navLinks{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 15px;
+}
+
+.navLinks li{
+    display: flex;
+    list-style-type: none;
+    align-items: center;
+
+}
+
+.navLinks a{
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+}
+
+.navLinks a:hover{
+    font-weight: bold;
+    transition: 0.2s;
+    text-decoration: underline;
+}
+
+.navLinks button{
+    border: none;
+    background-color: #001f3f;
+    color: white;
+    font-size: 15px;
+    padding: 10px;
+    border: 2px solid white;
+    border-radius: 10px;
+}
+
+.navLinks button:hover{
+    cursor: pointer;
+    background-color: #87CEFA;
+    border-color: #87CEFA;
+    color: black;
+    transition: 0.2s;
+}
+

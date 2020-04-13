@@ -2,8 +2,8 @@ import React, {useState, useCallback} from 'react';
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 
 import Auth from './users/pages/Auth';
-import MainNavigation from './notes/components/MainNavigation';
-import Footer from './notes/components/Footer';
+import MainNavigation from './shared/components/MainNavigation';
+import Footer from './shared/components/Footer';
 import Home from './notes/pages/Home';
 import Note from './notes/pages/Note';
 import TeamUsers from './users/pages/TeamUsers';
@@ -20,9 +20,11 @@ import './App.css';
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userId, setUserId] = useState();
 
-  const login = useCallback(()=>{
+  const login = useCallback((uid)=>{
     setIsLoggedIn(true);
+    setUserId(uid);
   });
 
   const logout = useCallback(()=>{
@@ -35,7 +37,7 @@ function App() {
       <main>
       <Switch>
         <Route path='/' exact>
-          <Home/>
+          <Home />
         </Route>
         <Route path='/:teamId/users' exact>
           <TeamUsers/>
@@ -66,7 +68,7 @@ function App() {
     )
 
   return (
-    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, login: login, logout: logout}}>
+    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, userId: userId, login: login, logout: logout}}>
     {isLoggedIn ? <Router>{page}</Router> : <Auth/>}
     </AuthContext.Provider>
   );
