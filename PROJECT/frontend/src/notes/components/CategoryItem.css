@@ -1,0 +1,24 @@
+.category{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.categoryImg{
+    display: flex;
+    flex-basis: 50%;
+    justify-content: center;
+}
+
+
+.categoryImg:hover{
+    cursor: pointer;
+}
+
+.categoryContent{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 50%;
+    text-align: left;
+}
