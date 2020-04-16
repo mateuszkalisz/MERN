@@ -1,24 +1,49 @@
 .category{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    min-width: 400px;
+    justify-content: center;
     align-items: center;
-    flex-grow: 1;
+    min-height: 200px;
 }
 
 .categoryImg{
     display: flex;
-    flex-basis: 50%;
-    justify-content: center;
+    cursor: pointer;
 }
 
-
-.categoryImg:hover{
-    cursor: pointer;
+.categoryTxt{
+    display: flex;
+    flex-direction: column;
 }
 
 .categoryContent{
     display: flex;
     flex-direction: column;
-    flex-basis: 50%;
-    text-align: left;
+}
+
+.categoryContent:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    transition: 0.3s;
+}
+
+.categoryHeader{
+    text-align: center;
+    
+}
+
+.categoryHeader h3{
+    padding: 10px 0 0 0;
+    margin: 0;
+    font-size: 18px;
+}
+
+.categoryCount{
+    text-align: center;
+}
+
+.categoryCount p{
+    padding: 0;
+    font-size: 14px;
 }

@@ -25,31 +25,28 @@ const Home = () => {
         </div>
       </section>
       <section className="categories">
-        <div className="categoriesRow">
           <CategoryItem
-            categoryName="Database"
+            categoryName="SQL/Database"
             categoryCount="10"
             categoryImg={databaseIcon}
           />
           <CategoryItem
-            categoryName="Komodo"
+            categoryName="ETL/Komodo"
             categoryCount="32"
             categoryImg={komodoIcon}
           />
           <CategoryItem
-            categoryName="Script"
+            categoryName="Scripting"
             categoryCount="7"
             categoryImg={scriptIcon}
           />
-        </div>
-        <div className="categoriesRow">
           <CategoryItem
-            categoryName="Admin"
+            categoryName="Administration"
             categoryCount="1"
             categoryImg={adminIcon}
           />
           <CategoryItem
-            categoryName="Guides"
+            categoryName="Instructions &amp; Guides"
             categoryCount="81"
             categoryImg={instructionIcon}
           />
@@ -58,7 +55,6 @@ const Home = () => {
             categoryCount="23"
             categoryImg={othersIcon}
           />
-        </div>
       </section>
     </div>
   );
