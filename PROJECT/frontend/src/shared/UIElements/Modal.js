@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import "./ErrorModal.css";
+import "./Modal.css";
 
-const ErrorModal = (props) => {
+const Modal = (props) => {
 
   const modal = (
     <div
@@ -21,7 +21,7 @@ const ErrorModal = (props) => {
     </div>
   );
 
-  return ReactDOM.createPortal(modal, document.getElementById("error-modal"));
+  return ReactDOM.createPortal(modal, document.getElementById("modal"));
 };
 
-export default ErrorModal;
+export default Modal;

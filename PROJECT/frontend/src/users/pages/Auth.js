@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import Header from "../components/Header";
-import ErrorModal from "../../shared/UIElements/ErrorModal";
+import Modal from "../../shared/UIElements/Modal";
 import { AuthContext } from "../../shared/context/AuthContext";
 
 import "./Auth.css";
@@ -18,7 +18,7 @@ const Auth = () => {
 
   const auth = useContext(AuthContext);
   const [isLoginMode, setIsLoginMode] = useState(true);
-  const [isValid, setIsValid] = useState(null);
+  const [isInvalid, setIsInvalid] = useState(null);
   const [error, setError] = useState();
 
   const [name, setName] = useState("");
@@ -27,7 +27,7 @@ const Auth = () => {
   const [team, setTeam] = useState("CoreFR");
 
   const closeModal = () =>{
-    setIsValid(null);
+    setIsInvalid(null);
   }
 
   const inputHandler = (e) => {
@@ -70,24 +70,24 @@ const Auth = () => {
 
     if(name.length < 6){
       setError("User name must be at least 6 characters. Please try again");
-      setIsValid(true);
+      setIsInvalid(true);
       return;
     }
 
     if(password.length < 8){
       setError("Password must be at least 6 characters. Please try again");
-      setIsValid(true);
+      setIsInvalid(true);
       return;
     }
 
     if (isLoginMode) {
       if (name === DUMMY_USER[0].name && password === DUMMY_USER[0].password) {
         console.log("Succesful login");
-        setIsValid(true);
+        setIsInvalid(true);
         auth.login(DUMMY_USER[0].id);
       } else {
         setError("Wrong credentials");
-        setIsValid(true);
+        setIsInvalid(true);
         return;
       }
 
@@ -95,13 +95,13 @@ const Auth = () => {
     } else {
       if (name === DUMMY_USER[0].name){
         setError("User existed");
-        setIsValid(true);
+        setIsInvalid(true);
         return;
       }
 
       if(!validateEmail(email)){
         setError("Invalid email address. Please try again!");
-        setIsValid(true);
+        setIsInvalid(true);
         return;
       }
 
@@ -130,8 +130,8 @@ const Auth = () => {
   }
 
   return (
-    <div className={`authentication ${isValid ? 'disabled': ''}`}>
-    {isValid ? <ErrorModal onClose={closeModal} className='error' header='Error' content={error}/> : null}
+    <div className={`authentication ${isInvalid ? 'disabled': ''}`}>
+    {isInvalid ? <Modal onClose={closeModal} className='error' header='Error' content={error}/> : null}
     <div className='auth'>
       <Header />
       <main className="authPanel">
@@ -146,7 +146,7 @@ const Auth = () => {
                 placeholder="User name"
                 value={name}
                 onChange={inputHandler}
-                disabled={isValid === null ? false : true}
+                disabled={isInvalid === null ? false : true}
               />
             </div>
             <div className="authInput">
@@ -157,7 +157,7 @@ const Auth = () => {
                 placeholder="Password"
                 value={password}
                 onChange={inputHandler}
-                disabled={isValid === null ? false : true}
+                disabled={isInvalid === null ? false : true}
               />
             </div>
             {!isLoginMode ? (
@@ -169,7 +169,7 @@ const Auth = () => {
                   placeholder="example@example.com"
                   onChange={inputHandler}
                   value={email}
-                  disabled={isValid === null ? false : true}
+                  disabled={isInvalid === null ? false : true}
                   />
               </div>
             ) : null}
@@ -181,7 +181,7 @@ const Auth = () => {
                   id="team"
                   onChange={inputHandler}
                   value={team}
-                  disabled={isValid === null ? false : true}
+                  disabled={isInvalid === null ? false : true}
                   >
                   <option value="CoreFr">CoreFR</option>
                   <option value="CoreUK">CoreUK</option>
