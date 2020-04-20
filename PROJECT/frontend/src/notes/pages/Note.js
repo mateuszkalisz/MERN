@@ -1,16 +1,15 @@
 import React from "react";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import "./Note.css";
 
 const Note = () => {
-
   const DUMMY_NOTES = [
     {
       id: 1,
-      title: 'O skryptach nr1',
-      description: 'O skryptach nr1.. O skryptach nr1.. O skryptach nr1.. O skryptach nr1.. O skryptach nr1.. O skryptach nr1.. O skryptach nr1..',
-      category: 'SCRIPT',
+      title: 'O skryptach nr1dsadsadsadasda',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempor risus at gravida venenatis. Mauris laoreet dignissim venenatis. Maecenas vehicula viverra diam, id placerat ante commodo aliquam. Nulla pretium est nulla, in eleifend enim tristique vel. Etiam vitae lorem finibus, consectetur massa in, molestie lorem. Mauris nulla justo, eleifend vitae facilisis et, iaculis id lectus. Pellentesque auctor volutpat feugiat. Morbi suscipit et urna sed laoreet. Maecenas facilisis quam ex, sit amet sollicitudin tortor sagittis quis. Maecenas eget mauris a sem mattis tempus. Integer fringilla nisi vitae nisi maximus, sed consectetur leo eleifend. Sed auctor luctus lacinia. Vivamus congue, elit quis pulvinar lobortis, urna nisl fringilla nisl, et ullamcorper libero nisi id orci. Sed gravida arcu quis tellus interdum aliquet. Aenean est risus, tincidunt sit amet est vitae, iaculis lacinia mi. Duis semper mi id purus condimentum dapibus eu ac lacus. Sed sodales tincidunt eros non pretium. Nunc malesuada, nunc eget iaculis eleifend, erat nisl congue sem, vel maximus lectus felis ut sem. Mauris suscipit magna at viverra hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer in quam gravida, blandit odio sed, consequat massa.',
+      category: 'IG',
       team: 'CoreFr',
       creatorId: 1,
       creator: 'Mateusz',
@@ -19,8 +18,8 @@ const Note = () => {
     {
       id: 2,
       title: 'O skryptach nr2',
-      description: 'O skryptach nr2.. O skryptach nr2.. O skryptach nr2.. O skryptach nr2.. O skryptach nr2.. O skryptach nr2.. O skryptach nr2..',
-      category: 'SCRIPT',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempor risus at gravida venenatis. Mauris laoreet dignissim venenatis. Maecenas vehicula viverra diam, id placerat ante commodo aliquam. Nulla pretium est nulla, in eleifend enim tristique vel. Etiam vitae lorem finibus, consectetur massa in, molestie lorem. Mauris nulla justo, eleifend vitae facilisis et, iaculis id lectus. Pellentesque auctor volutpat feugiat. Morbi suscipit et urna sed laoreet. Maecenas facilisis quam ex, sit amet sollicitudin tortor sagittis quis. Maecenas eget mauris a sem mattis tempus. Integer fringilla nisi vitae nisi maximus, sed consectetur leo eleifend. Sed auctor luctus lacinia. Vivamus congue, elit quis pulvinar lobortis, urna nisl fringilla nisl, et ullamcorper libero nisi id orci. Sed gravida arcu quis tellus interdum aliquet. Aenean est risus, tincidunt sit amet est vitae, iaculis lacinia mi. Duis semper mi id purus condimentum dapibus eu ac lacus. Sed sodales tincidunt eros non pretium. Nunc malesuada, nunc eget iaculis eleifend, erat nisl congue sem, vel maximus lectus felis ut sem. Mauris suscipit magna at viverra hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer in quam gravida, blandit odio sed, consequat massa.',
+      category: 'ETL',
       team: 'CoreFr',
       creatorId: 1,
       creator: 'Mateusz',
@@ -29,7 +28,7 @@ const Note = () => {
     {
       id: 3,
       title: 'O sqlkach 1',
-      description: 'O sqlkach nr1.. O sqlkach nr1.. O sqlkach nr1.. O sqlkach nr1.. O sqlkach nr1.. O sqlkach nr1.. O sqlkach nr1.. O sqlkach nr1..',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempor risus at gravida venenatis. Mauris laoreet dignissim venenatis. Maecenas vehicula viverra diam, id placerat ante commodo aliquam. Nulla pretium est nulla, in eleifend enim tristique vel. Etiam vitae lorem finibus, consectetur massa in, molestie lorem. Mauris nulla justo, eleifend vitae facilisis et, iaculis id lectus. Pellentesque auctor volutpat feugiat. Morbi suscipit et urna sed laoreet. Maecenas facilisis quam ex, sit amet sollicitudin tortor sagittis quis. Maecenas eget mauris a sem mattis tempus. Integer fringilla nisi vitae nisi maximus, sed consectetur leo eleifend. Sed auctor luctus lacinia. Vivamus congue, elit quis pulvinar lobortis, urna nisl fringilla nisl, et ullamcorper libero nisi id orci. Sed gravida arcu quis tellus interdum aliquet. Aenean est risus, tincidunt sit amet est vitae, iaculis lacinia mi. Duis semper mi id purus condimentum dapibus eu ac lacus. Sed sodales tincidunt eros non pretium. Nunc malesuada, nunc eget iaculis eleifend, erat nisl congue sem, vel maximus lectus felis ut sem. Mauris suscipit magna at viverra hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer in quam gravida, blandit odio sed, consequat massa.',
       category: 'SQL',
       team: 'CoreFR',
       creatorId: 2,
@@ -39,8 +38,8 @@ const Note = () => {
     {
       id: 4,
       title: 'O sqlkach 2',
-      description: 'O sqlkach nr2.. O sqlkach nr2.. O sqlkach nr2.. O sqlkach nr2.. O sqlkach nr2.. O sqlkach nr2.. O sqlkach nr2.. O sqlkach nr2..',
-      category: 'SQL',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempor risus at gravida venenatis. Mauris laoreet dignissim venenatis. Maecenas vehicula viverra diam, id placerat ante commodo aliquam. Nulla pretium est nulla, in eleifend enim tristique vel. Etiam vitae lorem finibus, consectetur massa in, molestie lorem. Mauris nulla justo, eleifend vitae facilisis et, iaculis id lectus. Pellentesque auctor volutpat feugiat. Morbi suscipit et urna sed laoreet. Maecenas facilisis quam ex, sit amet sollicitudin tortor sagittis quis. Maecenas eget mauris a sem mattis tempus. Integer fringilla nisi vitae nisi maximus, sed consectetur leo eleifend. Sed auctor luctus lacinia. Vivamus congue, elit quis pulvinar lobortis, urna nisl fringilla nisl, et ullamcorper libero nisi id orci. Sed gravida arcu quis tellus interdum aliquet. Aenean est risus, tincidunt sit amet est vitae, iaculis lacinia mi. Duis semper mi id purus condimentum dapibus eu ac lacus. Sed sodales tincidunt eros non pretium. Nunc malesuada, nunc eget iaculis eleifend, erat nisl congue sem, vel maximus lectus felis ut sem. Mauris suscipit magna at viverra hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer in quam gravida, blandit odio sed, consequat massa.',
+      category: 'ADMIN',
       team: 'CoreFR',
       creatorId: 2,
       creator: 'Maja',
@@ -49,8 +48,8 @@ const Note = () => {
     {
       id: 5,
       title: 'Inne 1',
-      description: 'O Inne 1..O Inne 1..O Inne 1.. O Inne 1.. O Inne 1.. O Inne 1..O Inne 1.. O Inne 1.. O Inne 1.. O Inne 1..',
-      category: 'OTHERS',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempor risus at gravida venenatis. Mauris laoreet dignissim venenatis. Maecenas vehicula viverra diam, id placerat ante commodo aliquam. Nulla pretium est nulla, in eleifend enim tristique vel. Etiam vitae lorem finibus, consectetur massa in, molestie lorem. Mauris nulla justo, eleifend vitae facilisis et, iaculis id lectus. Pellentesque auctor volutpat feugiat. Morbi suscipit et urna sed laoreet. Maecenas facilisis quam ex, sit amet sollicitudin tortor sagittis quis. Maecenas eget mauris a sem mattis tempus. Integer fringilla nisi vitae nisi maximus, sed consectetur leo eleifend. Sed auctor luctus lacinia. Vivamus congue, elit quis pulvinar lobortis, urna nisl fringilla nisl, et ullamcorper libero nisi id orci. Sed gravida arcu quis tellus interdum aliquet. Aenean est risus, tincidunt sit amet est vitae, iaculis lacinia mi. Duis semper mi id purus condimentum dapibus eu ac lacus. Sed sodales tincidunt eros non pretium. Nunc malesuada, nunc eget iaculis eleifend, erat nisl congue sem, vel maximus lectus felis ut sem. Mauris suscipit magna at viverra hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer in quam gravida, blandit odio sed, consequat massa.',
+      category: 'SQL',
       team: 'CoreFR',
       creatorId: 1,
       creator: 'Mateusz',
@@ -59,7 +58,7 @@ const Note = () => {
     {
       id: 6,
       title: 'Skrypcik1',
-      description: 'Skrypcik1 Skrypcik1 Skrypcik1 Skrypcik1 Skrypcik1 Skrypcik1 Skrypcik1 Skrypcik1 Skrypcik1 Skrypcik1 Skrypcik1 Skrypcik1',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempor risus at gravida venenatis. Mauris laoreet dignissim venenatis. Maecenas vehicula viverra diam, id placerat ante commodo aliquam. Nulla pretium est nulla, in eleifend enim tristique vel. Etiam vitae lorem finibus, consectetur massa in, molestie lorem. Mauris nulla justo, eleifend vitae facilisis et, iaculis id lectus. Pellentesque auctor volutpat feugiat. Morbi suscipit et urna sed laoreet. Maecenas facilisis quam ex, sit amet sollicitudin tortor sagittis quis. Maecenas eget mauris a sem mattis tempus. Integer fringilla nisi vitae nisi maximus, sed consectetur leo eleifend. Sed auctor luctus lacinia. Vivamus congue, elit quis pulvinar lobortis, urna nisl fringilla nisl, et ullamcorper libero nisi id orci. Sed gravida arcu quis tellus interdum aliquet. Aenean est risus, tincidunt sit amet est vitae, iaculis lacinia mi. Duis semper mi id purus condimentum dapibus eu ac lacus. Sed sodales tincidunt eros non pretium. Nunc malesuada, nunc eget iaculis eleifend, erat nisl congue sem, vel maximus lectus felis ut sem. Mauris suscipit magna at viverra hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer in quam gravida, blandit odio sed, consequat massa.',
       category: 'SCRIPT',
       team: 'CoreFR',
       creatorId: 1,
@@ -69,8 +68,8 @@ const Note = () => {
     {
       id: 7,
       title: 'Skrypcik 2',
-      description: 'Skrypcik 2 Skrypcik 2 Skrypcik 2 Skrypcik 2 Skrypcik 2 Skrypcik 2 Skrypcik 2 Skrypcik 2 Skrypcik 2 Skrypcik 2 Skrypcik 2 Skrypcik 2',
-      category: 'SCRIPT',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempor risus at gravida venenatis. Mauris laoreet dignissim venenatis. Maecenas vehicula viverra diam, id placerat ante commodo aliquam. Nulla pretium est nulla, in eleifend enim tristique vel. Etiam vitae lorem finibus, consectetur massa in, molestie lorem. Mauris nulla justo, eleifend vitae facilisis et, iaculis id lectus. Pellentesque auctor volutpat feugiat. Morbi suscipit et urna sed laoreet. Maecenas facilisis quam ex, sit amet sollicitudin tortor sagittis quis. Maecenas eget mauris a sem mattis tempus. Integer fringilla nisi vitae nisi maximus, sed consectetur leo eleifend. Sed auctor luctus lacinia. Vivamus congue, elit quis pulvinar lobortis, urna nisl fringilla nisl, et ullamcorper libero nisi id orci. Sed gravida arcu quis tellus interdum aliquet. Aenean est risus, tincidunt sit amet est vitae, iaculis lacinia mi. Duis semper mi id purus condimentum dapibus eu ac lacus. Sed sodales tincidunt eros non pretium. Nunc malesuada, nunc eget iaculis eleifend, erat nisl congue sem, vel maximus lectus felis ut sem. Mauris suscipit magna at viverra hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer in quam gravida, blandit odio sed, consequat massa.',
+      category: 'OTHERS',
       team: 'CoreFR',
       creatorId: 1,
       creator: 'Mateusz',
@@ -79,8 +78,8 @@ const Note = () => {
     {
       id: 8,
       title: 'Skrypcik 3',
-      description: 'Skrypcik 3 Skrypcik 3 Skrypcik 3 Skrypcik 3 Skrypcik 3 Skrypcik 3 Skrypcik 3 Skrypcik 3 Skrypcik 3 Skrypcik 3 Skrypcik 3 Skrypcik 3',
-      category: 'SCRIPT',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempor risus at gravida venenatis. Mauris laoreet dignissim venenatis. Maecenas vehicula viverra diam, id placerat ante commodo aliquam. Nulla pretium est nulla, in eleifend enim tristique vel. Etiam vitae lorem finibus, consectetur massa in, molestie lorem. Mauris nulla justo, eleifend vitae facilisis et, iaculis id lectus. Pellentesque auctor volutpat feugiat. Morbi suscipit et urna sed laoreet. Maecenas facilisis quam ex, sit amet sollicitudin tortor sagittis quis. Maecenas eget mauris a sem mattis tempus. Integer fringilla nisi vitae nisi maximus, sed consectetur leo eleifend. Sed auctor luctus lacinia. Vivamus congue, elit quis pulvinar lobortis, urna nisl fringilla nisl, et ullamcorper libero nisi id orci. Sed gravida arcu quis tellus interdum aliquet. Aenean est risus, tincidunt sit amet est vitae, iaculis lacinia mi. Duis semper mi id purus condimentum dapibus eu ac lacus. Sed sodales tincidunt eros non pretium. Nunc malesuada, nunc eget iaculis eleifend, erat nisl congue sem, vel maximus lectus felis ut sem. Mauris suscipit magna at viverra hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer in quam gravida, blandit odio sed, consequat massa.',
+      category: 'ETL',
       team: 'CoreFR',
       creatorId: 1,
       creator: 'Mateusz',
@@ -89,7 +88,7 @@ const Note = () => {
     {
       id: 9,
       title: 'Skrypcik 4',
-      description: 'Skrypcik 4 Skrypcik 4 Skrypcik 4 Skrypcik 4 Skrypcik 4Skrypcik 4 Skrypcik 4 Skrypcik 4 Skrypcik 4 Skrypcik 4',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam tempor risus at gravida venenatis. Mauris laoreet dignissim venenatis. Maecenas vehicula viverra diam, id placerat ante commodo aliquam. Nulla pretium est nulla, in eleifend enim tristique vel. Etiam vitae lorem finibus, consectetur massa in, molestie lorem. Mauris nulla justo, eleifend vitae facilisis et, iaculis id lectus. Pellentesque auctor volutpat feugiat. Morbi suscipit et urna sed laoreet. Maecenas facilisis quam ex, sit amet sollicitudin tortor sagittis quis. Maecenas eget mauris a sem mattis tempus. Integer fringilla nisi vitae nisi maximus, sed consectetur leo eleifend. Sed auctor luctus lacinia. Vivamus congue, elit quis pulvinar lobortis, urna nisl fringilla nisl, et ullamcorper libero nisi id orci. Sed gravida arcu quis tellus interdum aliquet. Aenean est risus, tincidunt sit amet est vitae, iaculis lacinia mi. Duis semper mi id purus condimentum dapibus eu ac lacus. Sed sodales tincidunt eros non pretium. Nunc malesuada, nunc eget iaculis eleifend, erat nisl congue sem, vel maximus lectus felis ut sem. Mauris suscipit magna at viverra hendrerit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Integer in quam gravida, blandit odio sed, consequat massa.',
       category: 'SCRIPT',
       team: 'CoreFR',
       creatorId: 2,
@@ -102,25 +101,27 @@ const Note = () => {
 
   const noteId = params.noteId;
 
-  let note = DUMMY_NOTES.filter(note => note.id.toString() === noteId);
-  note = note[0]; 
+  let note = DUMMY_NOTES.filter((note) => note.id.toString() === noteId);
+  note = note[0];
 
-  return <div className="currentNote">
-    <div className="currentNoteHeader">
-          <h2>{note.title}</h2>
-        </div>
-        <div className="currentNoteDescription">
-          <p>{note.description}</p>
-        </div>
-        <div className="currentNoteFooter">
-          <h3>{note.creator}</h3>
-          <h4>{note.createDate}</h4>
-        </div>
-        <div className="currentNoteOptions">
-          <button className="editNote">EDIT</button>
-          <button className="deleteNote">DELETE</button>
-        </div>
-  </div>;
+  return (
+    <div className="currentNote">
+      <div className="currentNoteHeader">
+        <h2>{note.title}</h2>
+      </div>
+      <div className="currentNoteDescription">
+        <p>{note.description}</p>
+      </div>
+      <div className="currentNoteFooter">
+        <h3>{note.creator}</h3>
+        <h4>{note.createDate}</h4>
+      </div>
+      <div className="currentNoteOptions">
+        <button className="editNote">EDIT</button>
+        <button className="deleteNote">DELETE</button>
+      </div>
+    </div>
+  );
 };
 
 export default Note;

@@ -22,6 +22,7 @@ const NoteList = (props) =>{
                     noteContent={note.description}
                     noteAuthor={note.creator}
                     noteCreateDate={note.createDate}
+                    categoryNote={note.category}
                     />
                 ))}
             </ul>
