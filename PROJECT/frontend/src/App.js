@@ -7,7 +7,6 @@ import Footer from './shared/components/Footer';
 import Home from './notes/pages/Home';
 import Note from './notes/pages/Note';
 import TeamUsers from './users/pages/TeamUsers';
-import TeamNotes from './notes/pages/TeamNotes';
 import CategoryNotes from './notes/pages/CategoryNotes';
 import UserNotes from './notes/pages/UserNotes';
 import NewNote from './notes/pages/NewNote';
@@ -21,10 +20,12 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userId, setUserId] = useState();
+  const [teamId, setTeamId] = useState();
 
-  const login = useCallback((uid)=>{
+  const login = useCallback((uid, tid)=>{
     setIsLoggedIn(true);
     setUserId(uid);
+    setTeamId(tid);
   });
 
   const logout = useCallback(()=>{
@@ -41,9 +42,6 @@ function App() {
         </Route>
         <Route path='/:teamId/users' exact>
           <TeamUsers/>
-        </Route>
-        <Route path='/:teamId/notes' exact>
-          <TeamNotes/>
         </Route>
         <Route path='/user/:userId/notes' exact>
           <UserNotes/>
@@ -68,7 +66,7 @@ function App() {
     )
 
   return (
-    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, userId: userId, login: login, logout: logout}}>
+    <AuthContext.Provider value={{isLoggedIn: isLoggedIn, userId: userId, teamId: teamId, login: login, logout: logout}}>
     {isLoggedIn ? <Router>{page}</Router> : <Auth/>}
     </AuthContext.Provider>
   );

@@ -13,7 +13,46 @@ const Auth = () => {
       password: "haslo123",
       email: "mateusz@mk.pl",
       team: "CoreFR",
+      notes: [
+        {id: 1, place: 'pierwsze miejsce'},
+        {id: 2, place: 'drugie miejsce'}
+      ]
     },
+    {
+      id: 2,
+      name: "Maja",
+      password: "haslo123",
+      email: "maja@ms.pl",
+      team: "CoreFR",
+      notes: [
+        {id: 1, place: 'pierwsze miejsce'},
+        {id: 2, place: 'drugie miejsce'},
+        {id: 3, place: 'trzecie miejsce'}
+      ]
+    },
+    {
+      id: 3,
+      name: "Jurek",
+      password: "haslo123",
+      email: "jurek@jb.pl",
+      team: "CoreFR",
+      notes: [
+        {id: 1, place: 'pierwsze miejsce'},
+        {id: 2, place: 'drugie miejsce'},
+        {id: 3, place: 'trzecie miejsce'}
+      ]
+    },
+    {
+      id: 4,
+      name: "Andrzej",
+      password: "haslo123",
+      email: "andrzej@az.pl",
+      team: "WOBE",
+      notes: [
+        {id: 1, place: 'pierwsze miejsce'},
+        {id: 2, place: 'drugie miejsce'}
+      ]
+    }
   ];
 
   const auth = useContext(AuthContext);
@@ -84,7 +123,7 @@ const Auth = () => {
       if (name === DUMMY_USER[0].name && password === DUMMY_USER[0].password) {
         console.log("Succesful login");
         setIsInvalid(true);
-        auth.login(DUMMY_USER[0].id);
+        auth.login(DUMMY_USER[0].id, team);
       } else {
         setError("Wrong credentials");
         setIsInvalid(true);

@@ -43,6 +43,7 @@
   width: 120px;
   text-align: center;
   border-radius: 20px;
+  color: white;
   font-weight: bold;
 }
 
@@ -52,9 +53,9 @@
 }
 
 .editNote:hover {
-  color: white;
   cursor: pointer;
   box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.75);
+  font-weight: bold;
 }
 
 .deleteNote {
@@ -63,7 +64,6 @@
 }
 
 .deleteNote:hover {
-  color: white;
   cursor: pointer;
   box-shadow: 0px 5px 20px 0px rgba(0, 0, 0, 0.75);
 }
