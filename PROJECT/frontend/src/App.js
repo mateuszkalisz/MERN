@@ -40,7 +40,7 @@ function App() {
         <Route path='/' exact>
           <Home />
         </Route>
-        <Route path='/:teamId/users' exact>
+        <Route path='/team/:teamId' exact>
           <TeamUsers/>
         </Route>
         <Route path='/user/:userId/notes' exact>

@@ -101,7 +101,7 @@ const UserNotes = () => {
     },
   ];
 
-  const userNOTES = DUMMY_NOTES.filter(note => note.creatorId === auth.userId)
+  const userNOTES = DUMMY_NOTES.filter(note => (note.creatorId === auth.userId));
 
   return(
   <div className='userNotesPage'>

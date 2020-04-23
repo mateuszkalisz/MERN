@@ -21,7 +21,7 @@ const NavLinks = () =>{
                 <NavLink to={`/user/${auth.userId}/notes`} exact>MY NOTES</NavLink>
             </li>
             <li>
-                <NavLink to="/:teamId/users" exact>MY TEAM</NavLink>
+                <NavLink to={`/team/${auth.teamId}`} exact>MY TEAM</NavLink>
             </li>
             <li>
                 <button onClick={auth.logout}>LOGOUT</button>
