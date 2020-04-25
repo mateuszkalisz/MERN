@@ -2,11 +2,11 @@ import React from "react";
 import {useParams} from 'react-router-dom';
 import NoteList from '../components/NoteList';
 
-import "./CategoryNotes.css";
+import "./TeamUserNotes.css";
 
-const CategoryNotes = () => {
-  
-  const catId = useParams().categoryId;
+const TeamUserNotes = () => {
+
+  const userId = useParams().userId;
 
   const DUMMY_NOTES = [
     {
@@ -101,14 +101,13 @@ const CategoryNotes = () => {
     },
   ];
 
-  const catNOTES = DUMMY_NOTES.filter(note => (note.category === catId));
+  const userNOTES = DUMMY_NOTES.filter(note => (note.creatorId.toString() === userId));
 
   return(
   <div className='userNotesPage'>
-    <NoteList notes={catNOTES}/>
+    <NoteList notes={userNOTES}/>
   </div>
   )
-
 };
 
-export default CategoryNotes;
+export default TeamUserNotes;

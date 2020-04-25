@@ -7,7 +7,7 @@ import "./UserItem.css";
 const UserItem = (props) => {
   return (
     <li className="userItem">
-      <Link to={`/trzebazmienicboniewiemcoto`}>
+      <Link to={`/team/user/${props.id}`}>
       <img src={userIcon} alt="userIcon" />
       <div className="userText">
         <h2>{props.userName}</h2>

@@ -7,6 +7,7 @@ import Footer from './shared/components/Footer';
 import Home from './notes/pages/Home';
 import Note from './notes/pages/Note';
 import TeamUsers from './users/pages/TeamUsers';
+import TeamUserNotes from './notes/pages/TeamUserNotes';
 import CategoryNotes from './notes/pages/CategoryNotes';
 import UserNotes from './notes/pages/UserNotes';
 import NewNote from './notes/pages/NewNote';
@@ -39,6 +40,9 @@ function App() {
       <Switch>
         <Route path='/' exact>
           <Home />
+        </Route>
+        <Route path='/team/user/:userId' exact>
+          <TeamUserNotes/>
         </Route>
         <Route path='/team/:teamId' exact>
           <TeamUsers/>

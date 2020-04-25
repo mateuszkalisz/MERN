@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import {Link} from "react-router-dom";
 
 import "./CategoryItem.css";
 
@@ -18,7 +19,9 @@ const CategoryItem = (props) => {
   };
 
   return (
-    <div className="category">
+
+    <li className="category">
+      <Link to={`/category/${props.category}/notes`}>
       <div
         className="categoryImg"
         onMouseEnter={hoverHandler}
@@ -40,7 +43,8 @@ const CategoryItem = (props) => {
           </div>
         </div>
       </div>
-    </div>
+      </Link>
+    </li>
   );
 };
 

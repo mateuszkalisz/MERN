@@ -7,6 +7,15 @@
     min-height: 200px;
 }
 
+.category a{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: black;
+}
+
 .categoryImg{
     display: flex;
     cursor: pointer;

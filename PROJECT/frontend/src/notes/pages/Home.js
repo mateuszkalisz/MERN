@@ -24,38 +24,44 @@ const Home = () => {
           </div>
         </div>
       </section>
-      <section className="categories">
+      <ul className="categories">
           <CategoryItem
             categoryName="SQL/Database"
+            category="SQL"
             categoryCount="10"
             categoryImg={databaseIcon}
           />
           <CategoryItem
             categoryName="ETL/Komodo"
+            category="ETL"
             categoryCount="32"
             categoryImg={komodoIcon}
           />
           <CategoryItem
             categoryName="Scripting"
+            category="SCRIPT"
             categoryCount="7"
             categoryImg={scriptIcon}
           />
           <CategoryItem
             categoryName="Administration"
+            category="ADMIN"
             categoryCount="1"
             categoryImg={adminIcon}
           />
           <CategoryItem
             categoryName="Instructions &amp; Guides"
+            category="IG"
             categoryCount="81"
             categoryImg={instructionIcon}
           />
           <CategoryItem
             categoryName="Others"
+            category="OTHERS"
             categoryCount="23"
             categoryImg={othersIcon}
           />
-      </section>
+      </ul>
     </div>
   );
 };
