@@ -1,9 +1,12 @@
-import React from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useState} from "react";
+import { useParams, Link } from "react-router-dom";
+import {AuthContext} from '../../shared/context/AuthContext';
+import DeleteModal from '../../shared/UIElements/DeleteModal';
 
 import "./Note.css";
 
 const Note = () => {
+
   const DUMMY_NOTES = [
     {
       id: 1,
@@ -97,14 +100,50 @@ const Note = () => {
     },
   ];
 
-  const params = useParams();
+  
+  const [showDeleteModal, setShowDeleteModal] = useState(null);
 
+  const auth = useContext(AuthContext);
+
+  const params = useParams();
   const noteId = params.noteId;
 
   let note = DUMMY_NOTES.filter((note) => note.id.toString() === noteId);
   note = note[0];
 
+
+  const closeDeleteModal = () =>{
+    setShowDeleteModal(null);
+  }
+
+  const acceptDeleteNote = () =>{
+    setShowDeleteModal(null);
+
+    const noteIndex = DUMMY_NOTES.findIndex( dummy => dummy.id === note.id);
+
+    // const deletedItem = 
+    DUMMY_NOTES.splice(noteIndex, 1);
+
+    console.log("The note has been removed!");
+
+    // console.log(deletedItem);
+    // console.log(DUMMY_NOTES);
+
+  }
+
+  const deleteNoteHandler = () =>{
+    setShowDeleteModal(true);
+  }
+
   return (
+    <>
+    {showDeleteModal ? <DeleteModal
+    onDelete={acceptDeleteNote}
+    onClose={closeDeleteModal}
+    className="delete"
+    header="Delete"
+    content="Do you really want to delete this note?"
+    /> : null}
     <div className="currentNote">
       <div className="currentNoteHeader">
         <h2>{note.title}</h2>
@@ -117,10 +156,11 @@ const Note = () => {
         <h4>{note.createDate}</h4>
       </div>
       <div className="currentNoteOptions">
-        <button className="editNote">EDIT</button>
-        <button className="deleteNote">DELETE</button>
+        {auth.userId === note.creatorId ? <Link to={`/notes/${note.id}/update`}><button className="editNote">EDIT</button></Link>: null}
+        {auth.userId === note.creatorId ? <button className="deleteNote" onClick={deleteNoteHandler}>DELETE</button> : null}
       </div>
     </div>
+    </>
   );
 };
 
