@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import CategoryItem from "../components/CategoryItem";
 
 import searchIcon from "../../img/search3.png";
@@ -11,14 +11,26 @@ import othersIcon from "../../img/others.png";
 import "./Home.css";
 
 const Home = () => {
+
+const [input, setInput] = useState();
+
+  const searchInputHandler = (e) =>{
+    setInput(e.target.value);
+  };
+
+  const searchHandler = () =>{
+
+    console.log(input);
+  }
+
   return (
     <div className="home">
       <section className="searcher">
         <div className="centerSearcher">
           <h2>Welcome!</h2>
           <div className="searchPanel">
-            <input type="text" placeholder="What are you looking for?" />
-            <button>
+            <input type="input" placeholder="What are you looking for?" onChange={searchInputHandler} value={input}/>
+            <button onClick={searchHandler}>
               <img src={searchIcon} alt="search" />
             </button>
           </div>

@@ -1,0 +1,4 @@
+.modalCancel > .modalDeleteButton{
+    border-radius: 0;
+    margin-bottom: 3px;
+}
