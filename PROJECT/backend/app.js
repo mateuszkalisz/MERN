@@ -5,6 +5,8 @@ const noteRoutes = require('./routes/note-routes');
 const app = express();
 const port = process.env.PORT || 5000;
 
+app.use(bodyParser.json());
+
 app.use(noteRoutes);
 
 app.use((error,req,res,next)=>{
