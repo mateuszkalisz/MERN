@@ -99,3 +99,52 @@ exports.DUMMY_NOTES = [
       privacy: false
     },
   ];
+
+  exports.DUMMY_USERS = [
+    {
+      id: 1,
+      name: "Mateusz",
+      password: "haslo123",
+      email: "mateusz@mk.pl",
+      team: "CoreFR",
+      notes: [
+        {id: 1, note: 'pierwsze miejsce'},
+        {id: 2, note: 'drugie miejsce'}
+      ]
+    },
+    {
+      id: 2,
+      name: "Maja",
+      password: "haslo123",
+      email: "maja@ms.pl",
+      team: "CoreFR",
+      notes: [
+        {id: 1, note: 'pierwsze miejsce'},
+        {id: 2, note: 'drugie miejsce'},
+        {id: 3, note: 'trzecie miejsce'}
+      ]
+    },
+    {
+      id: 3,
+      name: "Jurek",
+      password: "haslo123",
+      email: "jurek@jb.pl",
+      team: "CoreFR",
+      notes: [
+        {id: 1, note: 'pierwsze miejsce'},
+        {id: 2, note: 'drugie miejsce'},
+        {id: 3, note: 'trzecie miejsce'}
+      ]
+    },
+    {
+      id: 4,
+      name: "Andrzej",
+      password: "haslo123",
+      email: "andrzej@az.pl",
+      team: "WOBE",
+      notes: [
+        {id: 1, note: 'pierwsze miejsce'},
+        {id: 2, note: 'drugie miejsce'}
+      ]
+    }
+  ];
