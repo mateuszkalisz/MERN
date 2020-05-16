@@ -1,10 +1,16 @@
 const HttpError = require('../models/http-error');
+const {validationResult} = require('express-validator');
 const { v4: uuidv4 } = require('uuid');
 const {DUMMY_USERS} = require('../util/dummyData');
 
 exports.login = (req,res,next) =>{
-    const {name, password} = req.body;
 
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(422).json({errors: errors.array()});
+    }
+
+    const {name, password} = req.body;
     const ifUserExists = DUMMY_USERS.find(user => user.name === name);
 
     if(!ifUserExists || ifUserExists.password !== password){
@@ -15,6 +21,12 @@ exports.login = (req,res,next) =>{
 };
 
 exports.signup = (req,res,next) =>{
+
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(422).json({errors: errors.array()});
+    }
+
     const {name, email, password, team} = req.body;
 
     const ifUserExists = DUMMY_USERS.find(user => user.name === name || user.email === email);

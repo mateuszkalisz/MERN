@@ -1,6 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const {DUMMY_NOTES} = require('../util/dummyData');
 const HttpError = require('../models/http-error');
+const {validationResult} = require('express-validator');
 
 exports.getAllNotes = (req,res,next) =>{
     const notes = DUMMY_NOTES;
@@ -39,6 +40,12 @@ exports.getUserNotes = (req,res,next)=>{
 };
 
 exports.createNewNote = (req,res,next) =>{
+
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(422).json({errors: errors.array()});
+    }
+
     const {title, description, category, creator, privacy} = req.body;
 
     const createdNote = {
@@ -57,6 +64,12 @@ exports.createNewNote = (req,res,next) =>{
 };
 
 exports.updateNote = (req,res,next)=>{
+
+    const errors = validationResult(req);
+    if(!errors.isEmpty()){
+        return res.status(422).json({errors: errors.array()});
+    }
+
     const noteId = req.params.noteId;
     const {title, description, privacy} = req.body;
 
