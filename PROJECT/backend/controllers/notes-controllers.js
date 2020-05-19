@@ -2,6 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 const {DUMMY_NOTES} = require('../util/dummyData');
 const HttpError = require('../models/http-error');
 const {validationResult} = require('express-validator');
+const Note = require('../models/notes');
 
 exports.getAllNotes = (req,res,next) =>{
     const notes = DUMMY_NOTES;
@@ -13,33 +14,53 @@ exports.getAllNotes = (req,res,next) =>{
     res.json({notes});
 };
 
-exports.getSelectedNote = (req,res,next)=>{
+exports.getSelectedNote = async (req,res,next)=>{
     const noteId = req.params.noteId;
 
-    const note = DUMMY_NOTES.find(n => n.id.toString() === noteId);
+    // const note = DUMMY_NOTES.find(n => n.id.toString() === noteId);
+    let note;
+
+    try{
+        note = await Note.findById(noteId);
+    }
+    catch(err){
+        const error = new HttpError(err, 500);
+        return next(error);
+    }
+    
 
     if(!note){
         // res.status(404).json({message: 'Could not find note for the provided id'});
         // next(error);
         const error = new HttpError('Could not find a notes for this user id', 404)
-        next(error);
+        return next(error);
     }
 
-    res.json({note});
+    res.json({note: note.toObject({getters: true})});
 };
 
-exports.getUserNotes = (req,res,next)=>{
+exports.getUserNotes = async (req,res,next)=>{
     const userId = req.params.userId;
-    const notes = DUMMY_NOTES.filter(n => n.creatorId.toString() === userId);
+    // const notes = DUMMY_NOTES.filter(n => n.creatorId.toString() === userId);
+
+    let notes;
+
+    try{
+        notes = await Note.find({creator: userId})
+    }
+    catch(err){
+        const error = new HttpError(err, 500);
+        return next(error);
+    }
 
     if(notes.length === 0){
         throw new HttpError('Could not find a notes for this user id', 404);
     }
 
-    res.json({notes});
+    res.json({notes: notes.map(note => note.toObject({getters: true}))});
 };
 
-exports.createNewNote = (req,res,next) =>{
+exports.createNewNote = async (req,res,next) =>{
 
     const errors = validationResult(req);
     if(!errors.isEmpty()){
@@ -48,17 +69,35 @@ exports.createNewNote = (req,res,next) =>{
 
     const {title, description, category, creator, privacy} = req.body;
 
-    const createdNote = {
-        id: uuidv4(),
-        title,
-        description,
-        category,
-        creator,
-        privacy,
-        createDate: new Date().toLocaleDateString()
-    };
+    const createdNote = new Note({
+      title,
+      description,
+      category,
+      creator,
+      privacy,
+      createDate: new Date()
+    });
 
-    DUMMY_NOTES.push(createdNote);
+    try{
+        await createdNote.save();
+    }
+    catch (err){
+        // const error = new HttpError(err, 500)
+        const error = new HttpError('Something went wrong... please try again.', 500)
+        return next(error);
+    }
+
+    // const createdNote = {
+    //     id: uuidv4(),
+    //     title,
+    //     description,
+    //     category,
+    //     creator,
+    //     privacy,
+    //     createDate: new Date().toLocaleString()
+    // };
+
+    // DUMMY_NOTES.push(createdNote);
 
     res.status(201).json({createdNote});
 };

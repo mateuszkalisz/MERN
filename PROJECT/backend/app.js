@@ -1,10 +1,13 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 const noteRoutes = require('./routes/note-routes');
 const userRoutes = require('./routes/user-routes');
+const {dbLink} = require('./dbLink');
 
 const app = express();
 const port = process.env.PORT || 5000;
+
 
 app.use(bodyParser.json());
 
@@ -19,4 +22,7 @@ app.use((error,req,res,next)=>{
     res.json({message: error.message || 'An unknown error occurred!!'});
 })
 
-app.listen(port);
+mongoose.connect(dbLink)
+.then(()=>{
+    app.listen(port);
+}).catch(err => console.log(err));
