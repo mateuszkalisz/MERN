@@ -7,7 +7,7 @@ const noteSchema = new Schema({
         category: {type: String, required: true},
         createDate: {type: Date, default: Date.now},
         privacy: {type: Boolean},
-        creator: {type: String, required: true},
+        creator: {type: mongoose.Types.ObjectId , required: true, ref: 'User'}
 });
 
 module.exports = mongoose.model('Note', noteSchema);

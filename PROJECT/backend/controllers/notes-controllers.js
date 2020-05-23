@@ -1,8 +1,10 @@
 const { v4: uuidv4 } = require('uuid');
-const {DUMMY_NOTES} = require('../util/dummyData');
+const mongoose = require('mongoose');
+// const {DUMMY_NOTES} = require('../util/dummyData');
 const HttpError = require('../models/http-error');
 const {validationResult} = require('express-validator');
 const Note = require('../models/notes');
+const User = require('../models/users');
 
 exports.getAllNotes = async (req,res,next) =>{
     // const notes = DUMMY_NOTES;
@@ -65,7 +67,8 @@ exports.getUserNotes = async (req,res,next)=>{
     }
 
     if(notes.length === 0){
-        throw new HttpError('Could not find a notes for this user id', 404);
+        const error = new HttpError('Could not find a notes for this user id', 404);
+        return next(error);
     }
 
     res.json({notes: notes.map(note => note.toObject({getters: true}))});
@@ -89,12 +92,35 @@ exports.createNewNote = async (req,res,next) =>{
       createDate: new Date()
     });
 
+    let user;
+
     try{
-        await createdNote.save();
+        user = await User.findById(creator);
+    }
+    catch(err){
+        const error = new HttpError(err, 500);
+        return next(error);
+    }
+
+    if(!user){
+        const error = new HttpError('We could not find the user for the provided id');
+        return next(error);
+    }
+
+    try{
+        // await createdNote.save();
+
+        const sess = await mongoose.startSession();
+        sess.startTransaction();
+        await createdNote.save({session: sess});
+        user.notes.push(createdNote);
+        await user.save({session: sess});
+        sess.commitTransaction();
+
     }
     catch (err){
-        // const error = new HttpError(err, 500)
-        const error = new HttpError('Something went wrong... please try again.', 500)
+        const error = new HttpError(err, 500)
+        // const error = new HttpError('Something went wrong... please try again.', 500)
         return next(error);
     }
 
@@ -110,7 +136,7 @@ exports.createNewNote = async (req,res,next) =>{
 
     // DUMMY_NOTES.push(createdNote);
 
-    res.status(201).json({createdNote});
+    res.status(201).json({createdNote: createdNote.toObject({getters: true})});
 };
 
 exports.updateNote = async (req,res,next)=>{
@@ -167,7 +193,7 @@ exports.deleteNote = async (req,res,next) =>{
     let deletedNote;
 
     try{
-        deletedNote = await Note.findById(noteId);
+        deletedNote = await Note.findById(noteId).populate('creator');
     }
     catch(err){
         const error = new HttpError(err, 500);
@@ -186,7 +212,12 @@ exports.deleteNote = async (req,res,next) =>{
     // DUMMY_NOTES.splice(noteIndex, 1);
 
     try{
-        await deletedNote.remove();
+        const sess = await mongoose.startSession();
+        sess.startTransaction();
+        await deletedNote.remove({session: sess});
+        deletedNote.creator.notes.pull(deletedNote);
+        await deletedNote.creator.save({session: sess});
+        sess.commitTransaction();
     }
 
     catch(err){
