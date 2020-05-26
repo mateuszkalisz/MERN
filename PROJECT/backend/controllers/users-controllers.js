@@ -1,7 +1,5 @@
 const HttpError = require('../models/http-error');
 const {validationResult} = require('express-validator');
-const { v4: uuidv4 } = require('uuid');
-// const {DUMMY_USERS} = require('../util/dummyData');
 const User = require('../models/users');
 
 exports.login = async (req,res,next) => {
@@ -28,14 +26,7 @@ exports.login = async (req,res,next) => {
         return next(error);
     }
 
-
-    // const ifUserExists = DUMMY_USERS.find(user => user.name === name);
-
-    // if(!ifUserExists || ifUserExists.password !== password){
-    //     throw new HttpError('Could not login. Credentials seem to be wrong.', 401)
-    // }
-
-    res.json('Logged in!');
+    res.json({user: existingUser.toObject({getters: true})});
 };
 
 exports.signup = async (req,res,next) =>{
@@ -46,8 +37,6 @@ exports.signup = async (req,res,next) =>{
     }
 
     const {name, email, password, team} = req.body;
-
-    // const ifUserExists = DUMMY_USERS.find(user => user.name === name || user.email === email);
 
     let ifNameExists;
     let ifEmailExists;
@@ -79,18 +68,13 @@ exports.signup = async (req,res,next) =>{
     catch(err){
         const error = new HttpError(err, 500);
         return next(error);
-    }
-
-    // DUMMY_USERS.push(createdUser);
-    
+    }    
 
     res.status(201).json({createdUser: createdUser.toObject({getters: true})});
 };
 
 exports.getTeamUsers = async (req,res,next) =>{
     const teamId = req.params.teamId;
-
-    // const teamUsers = DUMMY_USERS.filter(user => user.team === teamId);
 
     const teamUsers  = await User.find({team: teamId});
 

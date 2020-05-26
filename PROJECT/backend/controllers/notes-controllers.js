@@ -1,13 +1,10 @@
-const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
-// const {DUMMY_NOTES} = require('../util/dummyData');
 const HttpError = require('../models/http-error');
 const {validationResult} = require('express-validator');
 const Note = require('../models/notes');
 const User = require('../models/users');
 
 exports.getAllNotes = async (req,res,next) =>{
-    // const notes = DUMMY_NOTES;
 
     let notes;
 
@@ -30,7 +27,6 @@ exports.getAllNotes = async (req,res,next) =>{
 exports.getSelectedNote = async (req,res,next)=>{
     const noteId = req.params.noteId;
 
-    // const note = DUMMY_NOTES.find(n => n.id.toString() === noteId);
     let note;
 
     try{
@@ -43,8 +39,6 @@ exports.getSelectedNote = async (req,res,next)=>{
     
 
     if(!note){
-        // res.status(404).json({message: 'Could not find note for the provided id'});
-        // next(error);
         const error = new HttpError('Could not find a notes for this user id', 404)
         return next(error);
     }
@@ -54,7 +48,6 @@ exports.getSelectedNote = async (req,res,next)=>{
 
 exports.getUserNotes = async (req,res,next)=>{
     const userId = req.params.userId;
-    // const notes = DUMMY_NOTES.filter(n => n.creatorId.toString() === userId);
 
     let notes;
 
@@ -108,7 +101,6 @@ exports.createNewNote = async (req,res,next) =>{
     }
 
     try{
-        // await createdNote.save();
 
         const sess = await mongoose.startSession();
         sess.startTransaction();
@@ -120,21 +112,8 @@ exports.createNewNote = async (req,res,next) =>{
     }
     catch (err){
         const error = new HttpError(err, 500)
-        // const error = new HttpError('Something went wrong... please try again.', 500)
         return next(error);
     }
-
-    // const createdNote = {
-    //     id: uuidv4(),
-    //     title,
-    //     description,
-    //     category,
-    //     creator,
-    //     privacy,
-    //     createDate: new Date().toLocaleString()
-    // };
-
-    // DUMMY_NOTES.push(createdNote);
 
     res.status(201).json({createdNote: createdNote.toObject({getters: true})});
 };
@@ -148,8 +127,6 @@ exports.updateNote = async (req,res,next)=>{
 
     const noteId = req.params.noteId;
     const {title, description, privacy} = req.body;
-
-    // const updatedNote = DUMMY_NOTES.find(note => note.id.toString() === noteId.toString());
 
     let updatedNote;
 
@@ -167,8 +144,6 @@ exports.updateNote = async (req,res,next)=>{
         next(error);
     };
 
-    // const noteIndex = DUMMY_NOTES.findIndex(note => note.id.toString() === noteId);
-
     updatedNote.title = title;
     updatedNote.description = description;
     updatedNote.privacy = privacy;
@@ -181,8 +156,6 @@ exports.updateNote = async (req,res,next)=>{
         const error = new HttpError(err, 500);
         return next(error);
     }
-
-    // DUMMY_NOTES[noteIndex] = updatedNote;
 
     res.status(200).json({updatedNote: updatedNote.toObject({getters: true})});
 };
@@ -200,16 +173,10 @@ exports.deleteNote = async (req,res,next) =>{
         return next(error);
     }
 
-    // const deletedNote = DUMMY_NOTES.find(note => note.id.toString() === noteId.toString());
-
     if(!deletedNote){
         const error = new HttpError('Could not find a note for this note id', 404)
         next(error);
     };
-
-    // const noteIndex = DUMMY_NOTES.findIndex(note => note.id.toString() === noteId);
-
-    // DUMMY_NOTES.splice(noteIndex, 1);
 
     try{
         const sess = await mongoose.startSession();
@@ -230,8 +197,6 @@ exports.deleteNote = async (req,res,next) =>{
 
 exports.findNoteByContent = async (req,res,next) =>{
     const {description} = req.query;
-
-    // const selectedNotes = DUMMY_NOTES.filter(note => note.description.toLowerCase().includes(content.toLowerCase()));
 
     let selectedNotes;
 

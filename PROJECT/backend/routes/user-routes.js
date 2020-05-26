@@ -6,13 +6,13 @@ const router = express.Router();
 
 router.post('/login', [
     check('name').isLength({min: 2}),
-    check('password').isLength({min: 6})
+    check('password').isLength({min: 8})
 ] ,login);
 
 router.post('/signup', [
     check('name').isLength({min: 2}),
     check('email').isEmail(),
-    check('password').isLength({min: 6})
+    check('password').isLength({min: 8})
 ], signup);
 
 router.get('/team/:teamId', getTeamUsers);
